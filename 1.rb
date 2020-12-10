@@ -17,6 +17,16 @@
 # something isn't quite adding up.
 #
 # Specifically, they need you to find the two entries that sum to 2020 and then multiply those two numbers together.
+#
+# --- Part Two ---
+# The Elves in accounting are thankful for your help; one of them even offers you a starfish coin they had left over
+# from a past vacation. They offer you a second one if you can find three numbers in your expense report that meet
+# the same criteria.
+#
+# Using the above example again, the three entries that sum to 2020 are 979, 366, and 675. Multiplying them together
+# produces the answer, 241861950.
+#
+# In your expense report, *what is the product of the three entries that sum to 2020?*
 
 class ExpenseReport
   attr_accessor :input
@@ -25,15 +35,11 @@ class ExpenseReport
     @input = input
   end
 
-  def the_two_entries
-    the_pairs = @input.combination(2).to_a
+  def product_of_entries_matching(number, sum)
+    the_pairs = @input.combination(number).to_a
     the_sums = the_pairs.map(&:sum)
-    index = the_sums.index(2020)
+    index = the_sums.index(sum)
 
-    the_pairs[index]
-  end
-
-  def the_answer
-    the_two_entries.reduce(:*)
+    the_pairs[index].reduce(:*)
   end
 end
